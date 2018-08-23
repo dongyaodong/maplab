@@ -121,10 +121,10 @@ void LoadBinaryFeaturesFromDataset(
     ++i;
   }
 
-  if (all_descriptors.cols() > FLAGS_lc_num_descriptors_to_train) {
+  if (all_descriptors->cols() > FLAGS_lc_num_descriptors_to_train) {
     LOG(WARNING) << "Truncated number of descriptors "
                  << FLAGS_lc_num_descriptors_to_train;
-    all_descriptors.conservativeResize(
+    all_descriptors->conservativeResize(
         Eigen::NoChange, FLAGS_lc_num_descriptors_to_train);
   }
 }
@@ -418,7 +418,7 @@ int main(int argc, char** argv) {
     CHECK(vi_map::serialization::loadMapFromFolder(map_folder_in_list, &map))
         << "Loading " << map_folder_in_list << " failed. ";
 
-    LoadBinaryFeaturesFromDataset(map, raw_descriptors&);
+    LoadBinaryFeaturesFromDataset(map, &raw_descriptors);
   }
 
   DescriptorVector projected_descriptors;
