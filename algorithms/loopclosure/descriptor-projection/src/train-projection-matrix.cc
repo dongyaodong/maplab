@@ -102,11 +102,12 @@ void TrainProjectionMatrix(const vi_map::VIMap& map) {
   descriptor_projection::ComputeProjectionMatrix(
       cov_matches, cov_non_matches, &A);
 
-  VLOG(3) << "Projection matrix:";
-  VLOG(3) << "\tcols: " << A.cols();
-  VLOG(3) << "\trows: " << A.rows();
-  VLOG(3) << "\tmin: " << A.minCoeff();
-  VLOG(3) << "\tmax: " << A.maxCoeff();
+  VLOG(0) << "Trained projection matrix:";
+  VLOG(0) << "\tcols: " << A.cols();
+  VLOG(0) << "\trows: " << A.rows();
+  VLOG(0) << "\tmin: " << A.minCoeff();
+  VLOG(0) << "\tmax: " << A.maxCoeff();
+  VLOG(0) << "\tmatrix: " << A;
 
   std::ofstream serializer(
       FLAGS_lc_projection_matrix_filename, std::ofstream::binary);

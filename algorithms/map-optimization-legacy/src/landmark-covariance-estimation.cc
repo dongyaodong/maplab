@@ -72,7 +72,8 @@ void LandmarkCovarianceEstimation::addErrorTerms(
 void LandmarkCovarianceEstimation::calculateCovariance(
     ceres::Problem* problem) {
   ceres::Covariance::Options covariance_options;
-  covariance_options.algorithm_type = ceres::SUITE_SPARSE_QR;
+  covariance_options.algorithm_type =
+      ceres::SPARSE_QR;  // ceres::SUITE_SPARSE_QR;
   covariance_options.num_threads = common::getNumHardwareThreads();
   covariance_options.min_reciprocal_condition_number = 1e-32;
   covariance_options.apply_loss_function = true;

@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(rovioli)
 
+set(CATKIN_DEVEL_PREFIX $ENV{HOME}/maplab_ws/devel)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CATKIN_DEVEL_PREFIX}/share/")
+
 find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
 
@@ -9,9 +12,6 @@ catkin_simple(ALL_DEPS_REQUIRED)
 #############
 cs_add_library(${PROJECT_NAME}_lib
   src/data-publisher-flow.cc
-  src/datasource-factory.cc
-  src/datasource-rosbag.cc
-  src/datasource-rostopic.cc
   src/feature-tracking.cc
   src/imu-camera-synchronizer.cc
   src/localizer.cc
@@ -21,6 +21,9 @@ cs_add_library(${PROJECT_NAME}_lib
   src/rovioli-node.cc
   src/synced-nframe-throttler.cc
   src/vio-update-builder.cc
+  src/datasource-factory.cc
+  src/datasource-rosbag.cc
+  src/datasource-rostopic.cc
 )
 
 #######
@@ -29,7 +32,15 @@ cs_add_library(${PROJECT_NAME}_lib
 cs_add_executable(rovioli
   app/rovioli-app.cc
 )
-target_link_libraries(rovioli ${PROJECT_NAME}_lib)
+target_link_libraries(rovioli ${PROJECT_NAME}_lib )
+
+
+
+cs_add_executable(generate_ncamera_config
+  app/generate_ncamera_config.cc
+  src/parameters.cpp
+)
+target_link_libraries(generate_ncamera_config)
 
 #########
 # SHARE #

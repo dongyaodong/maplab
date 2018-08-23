@@ -1,4 +1,4 @@
-#ifndef MAP_OPTIMIZATION_SOLVER_OPTIONS_H_
+#ifndef MAP_OPTIMIZATION_SOLVER_OPTIONS_H_ // NOLINT
 #define MAP_OPTIMIZATION_SOLVER_OPTIONS_H_
 
 #include <memory>
@@ -33,7 +33,8 @@ inline ceres::Solver::Options initSolverOptionsFromFlags() {
     options.linear_solver_type = ceres::SPARSE_NORMAL_CHOLESKY;
   }
 
-  options.sparse_linear_algebra_library_type = ceres::SUITE_SPARSE;
+  options.sparse_linear_algebra_library_type =
+      ceres::EIGEN_SPARSE;  // ceres::SUITE_SPARSE;
 
   // Do not copy the data back at every iteration. Remember to turn it on if
   // any callbacks consuming this data are added later.
@@ -57,4 +58,4 @@ inline void addCallbacksToSolverOptions(
 }
 
 }  // namespace map_optimization
-#endif  // MAP_OPTIMIZATION_SOLVER_OPTIONS_H_
+#endif  // MAP_OPTIMIZATION_SOLVER_OPTIONS_H_ // NOLINT

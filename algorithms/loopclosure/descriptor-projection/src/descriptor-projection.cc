@@ -77,7 +77,9 @@ void ProjectDescriptorBlock(
   } else {
     CHECK_EQ(projection_matrix.cols(), num_descriptor_bits)
         << "Projection matrix dimensions don't match the descriptor length. "
-        << "Double check your setting for feature_descriptor_type.";
+        << "\nProjection_matrix.cols is " << projection_matrix.cols()
+        << "\nnum_descriptor_bits is " << num_descriptor_bits
+        << "\nDouble check your setting for feature_descriptor_type.";
   }
 
   *projected_descriptors =

@@ -96,7 +96,8 @@ ceres::Solver::Options GraphBaOptimizer::getDefaultSolverOptions() const {
   options.max_trust_region_radius = 1e20;
   options.trust_region_strategy_type = ceres::LEVENBERG_MARQUARDT;
   options.linear_solver_type = ceres::SPARSE_NORMAL_CHOLESKY;
-  options.sparse_linear_algebra_library_type = ceres::SUITE_SPARSE;
+  options.sparse_linear_algebra_library_type =
+      ceres::EIGEN_SPARSE;  // ceres::SUITE_SPARSE;
   for (std::shared_ptr<ceres::IterationCallback> callback : solver_callbacks_) {
     options.callbacks.push_back(callback.get());
   }

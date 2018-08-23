@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Script to run ROVIOLI from a loomo rosbag data source.
+# Usage: tutorial_loomo <output save folder> <rosbag path> [<additional rovioli flags>]
+
+DATA_FOLDER=$1
+ROSBAG=$2
+LOCALIZATION_MAP_OUTPUT=$DATA_FOLDER/vi-map
+NCAMERA_CALIBRATION="$DATA_FOLDER/maplab_ncamera.yaml"
+IMU_PARAMETERS_MAPLAB="$ROVIO_CONFIG_DIR/imu-realsense-zr300.yaml"
+IMU_PARAMETERS_ROVIO="$ROVIO_CONFIG_DIR/imu-sigmas-rovio.yaml"
+REST=$@
+
+rosrun rovioli generate_ncamera_config \
+  --v=2 \
+  --data_folder=$DATA_FOLDER
+
+rosrun rovioli rovioli \
+  --alsologtostderr=1 \
+  --v=2 \
+  --overwrite=true \
+  --ncamera_calibration=$NCAMERA_CALIBRATION  \
+  --imu_parameters_maplab=$IMU_PARAMETERS_MAPLAB \
+  --imu_parameters_rovio=$IMU_PARAMETERS_ROVIO \
+  --datasource_type="rosbag" \
+  --save_map_folder="$LOCALIZATION_MAP_OUTPUT" \
+  --optimize_map_to_localization_map=false \
+  --map_builder_save_image_as_resources=false \
+  --datasource_rosbag=$ROSBAG $REST

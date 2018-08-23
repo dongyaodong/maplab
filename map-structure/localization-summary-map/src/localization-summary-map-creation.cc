@@ -135,6 +135,13 @@ void createLocalizationSummaryMapFromLandmarkList(
                                 << FLAGS_lc_projection_matrix_filename;
   common::Deserialize(&projection_matrix, &deserializer);
 
+  VLOG(0) << "Using projection matrix:";
+  VLOG(0) << "\tcols: " << projection_matrix.cols();
+  VLOG(0) << "\trows: " << projection_matrix.rows();
+  VLOG(0) << "\tmin: " << projection_matrix.minCoeff();
+  VLOG(0) << "\tmax: " << projection_matrix.maxCoeff();
+  VLOG(0) << "\tmatrix: " << projection_matrix;
+
   projected_descriptors.resize(
       FLAGS_lc_target_dimensionality, observations.size());
   observer_indices.resize(observations.size());
