@@ -1,4 +1,4 @@
-#ifndef ROVIOLI_PARAMETERS_H_ // NOLINT
+#ifndef ROVIOLI_PARAMETERS_H_  // NOLINT
 #define ROVIOLI_PARAMETERS_H_
 
 #include <atomic>
